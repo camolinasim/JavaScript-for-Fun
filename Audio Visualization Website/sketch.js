@@ -1,14 +1,9 @@
-// Daniel Shiffman
-// http://codingtra.in
-// http://patreon.com/codingtrain
-// Code for: https://youtu.be/h_aTgOl9J5I
-
+//Audio Visualizer - Cristian Molina
 var song;
 var amp;
 var button;
 var w;
 var barNum = 2048;
-
 var volhistory = [];
 
 function toggleSong() {
@@ -41,14 +36,18 @@ function draw() {
     var spectrum = fft.analyze();
     //mic.connect(spectrum);
     //console.log(spectrum);
-    stroke(255);
+    //stroke(255);
+    let c = color(0, 191, 255);
+
     for (var i = 0; i < spectrum.length; i++) {
         var amp = spectrum[i];
+        //console.log(amp);
         var y = map(amp, 0, barNum, height, 0);
         rect(i * w, y / 2, w, height - y);
     }
+    //
 
-    stroke(255);
-    noFill();
+    stroke(c);
+    //noFill();
 
 }
