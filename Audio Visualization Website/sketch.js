@@ -1,9 +1,15 @@
 //Audio Visualizer - Cristian Molina
+
+//for me in the future:
+// that -1000 in the map function controls how big the rectangles are. Don't ask me why idk
+//The more negative, the bigger the rectangles
+//and that weird 1.5 in the rect function is so that
+//the blue line appears in the middle of the screen
 var song;
 var amp;
 var button;
 var w;
-var barNum = 2048;
+var barNum = 4096;
 var volhistory = [];
 
 function toggleSong() {
@@ -19,7 +25,7 @@ function preload() {
 }
 
 function setup() {
-    createCanvas(1500, 810);
+    createCanvas(1500, 840);
     mic = new p5.AudioIn();
     mic.start();
     angleMode(DEGREES);
@@ -30,6 +36,7 @@ function setup() {
     mic.connect(fft);
     w = width / barNum;
 }
+
 
 function draw() {
     background(0);
@@ -42,8 +49,8 @@ function draw() {
     for (var i = 0; i < spectrum.length; i++) {
         var amp = spectrum[i];
         //console.log(amp);
-        var y = map(amp, 0, barNum, height, 0);
-        rect(i * w, y / 2, w, height - y);
+        var y = map(amp, 0, barNum, height, -10000);
+        rect(i * w, y / 1.5, w, height - y);
     }
     //
 
@@ -51,3 +58,4 @@ function draw() {
     //noFill();
 
 }
+
